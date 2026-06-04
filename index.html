@@ -68,37 +68,54 @@
     </div>
 
     <script>
-        const noBtn = document.getElementById("noBtn");
+    const noBtn = document.getElementById("noBtn");
 
-        noBtn.addEventListener("mouseover", () => {
-            const maxX = window.innerWidth - noBtn.offsetWidth;
-            const maxY = window.innerHeight - noBtn.offsetHeight;
+    function moveButton() {
+        const padding = 20;
 
-            const randomX = Math.floor(Math.random() * maxX);
-            const randomY = Math.floor(Math.random() * maxY);
+        const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+        const maxY = window.innerHeight - noBtn.offsetHeight - padding;
 
-            noBtn.style.left = randomX + "px";
-            noBtn.style.top = randomY + "px";
-            noBtn.style.position = "fixed";
-        });
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
 
-	document.getElementById("yesBtn")
-	.addEventListener("click", async () => {
+        noBtn.style.position = "fixed";
+        noBtn.style.left = randomX + "px";
+        noBtn.style.top = randomY + "px";
+    }
 
-    	await fetch("https://formspree.io/f/mlgkeyna", {
-        	method: "POST",
-        	headers: {
-            	"Content-Type": "application/json"
-        	},
-        body: JSON.stringify({
-            response: "YES ❤️",
-            time: new Date().toLocaleString()
-        })
+    // 🖥️ Laptop hover
+    noBtn.addEventListener("mouseover", moveButton);
+
+    // 📱 Mobile touch (IMPORTANT FIX)
+    noBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        moveButton();
     });
 
-    alert("Aww 😍 Thank you!");
-});
-    </script>
+    // extra safety for mobile tap
+    noBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        moveButton();
+    });
+
+    document.getElementById("yesBtn")
+    .addEventListener("click", async () => {
+
+        await fetch("https://formspree.io/f/mlgkeyna", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                response: "YES ❤️",
+                time: new Date().toLocaleString()
+            })
+        });
+
+        alert("Aww 😍 Thank you!");
+    });
+	</script>
 
 </body>
 </html>
