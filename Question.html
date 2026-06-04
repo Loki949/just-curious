@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Question for You ❤️</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffe6eb;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 35px;
+            margin-bottom: 30px;
+        }
+
+        .buttons {
+            position: relative;
+            width: 400px;
+            height: 200px;
+        }
+
+        button {
+            padding: 15px 35px;
+            font-size: 20px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #yesBtn {
+            background: #4CAF50;
+            color: white;
+            margin-right: 20px;
+        }
+
+        #noBtn {
+            background: #ff4d4d;
+            color: white;
+            position: absolute;
+            left: 220px;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Will you forgive me? ❤️</h1>
+
+        <div class="buttons">
+            <button id="yesBtn">Yes 😊</button>
+            <button id="noBtn">No 😈</button>
+        </div>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById("noBtn");
+
+        noBtn.addEventListener("mouseover", () => {
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
+
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+
+            noBtn.style.left = randomX + "px";
+            noBtn.style.top = randomY + "px";
+            noBtn.style.position = "fixed";
+        });
+
+	document.getElementById("yesBtn")
+	.addEventListener("click", async () => {
+
+    	await fetch("https://formspree.io/f/mlgkeyna", {
+        	method: "POST",
+        	headers: {
+            	"Content-Type": "application/json"
+        	},
+        body: JSON.stringify({
+            response: "YES ❤️",
+            time: new Date().toLocaleString()
+        })
+    });
+
+    alert("Aww 😍 Thank you!");
+});
+    </script>
+
+</body>
+</html>
